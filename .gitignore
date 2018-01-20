@@ -1,0 +1,13 @@
+# Python
+/venv/
+/__pycache__/
+**/__pycache__/
+**/*.pyc
+
+# Project
+/logs/
+!/logs/.gitkeep
+config.py
+
+# IDE
+.ropeproject/

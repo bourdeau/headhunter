@@ -1,0 +1,31 @@
+[[source]]
+
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+
+[packages]
+
+flask = "==0.12.2"
+flask-sqlalchemy = "==2.3.2"
+flask-migrate = "==2.1.1"
+flask-security = "==3.0.0"
+python-slugify = "==1.2.4"
+pymysql = "==0.7.11"
+bcrypt = "==3.1.4"
+selenium = "==3.8.1"
+"beautifulsoup4" = "==4.6.0"
+lxml = "==4.1.1"
+sqlalchemy-utils = "*"
+pygithub = "*"
+email-split = "*"
+
+
+[dev-packages]
+
+
+
+[requires]
+
+python_version = "3.6"
