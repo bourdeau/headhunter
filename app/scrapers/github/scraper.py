@@ -6,13 +6,15 @@ from app.application import db
 
 
 class GithubScraper():
+    """ Scrap Github with it's API"""
 
     def __init__(self, email, password):
         self.github = Github(email, password)
 
     def run(self):
-
-        companies = Company.query.all()
+        """Main"""
+        companies = Company.query.filter(
+            Company.email.is_(None), Company.has_github.is_(False))
 
         for company in companies:
             results = self.github.search_users(query=company.name)
@@ -21,41 +23,41 @@ class GithubScraper():
             if nb == 0:
                 continue
 
-            self.get_company_data(company, results)
+            self._get_company_data(company, results)
 
-    def get_company_data(self, company, results):
+    def _get_company_data(self, company, results):
+        """Search for email or domain to match our Company"""
+        limit = 10
+        index = 0
+        for user in results:
+            if index == limit:
+                break
 
-            limit = 10
-            index = 0
-            for user in results:
-                if index == limit:
-                    break
+            if not user.blog and not user.email:
+                continue
 
-                if not user.blog and not user.email:
-                    continue
+            company_domain = urlparse(company.web_site).netloc
 
-                company_domain = urlparse(company.web_site).netloc
+            if user.blog:
+                user_domain = urlparse(user.blog).netloc
 
-                if user.blog:
-                    user_domain = urlparse(user.blog).netloc
+            # Blog domain is preffered over email
+            if user.email and not user.blog:
+                email = email_split(user.email)
+                user_domain = email.domain
 
-                # Blog domain is preffered over email
-                if user.email and not user.blog:
-                    email = email_split(user.email)
-                    user_domain = email.domain
+            if company_domain == user_domain:
+                company.has_github = True
+                if user.email:
+                    company.email = user.email
 
-                if company_domain == user_domain:
-                    company.has_github = True
-                    if user.email:
-                        company.email = user.email
+                db.session.add(company)
+                db.session.commit()
+                # self._get_users(user)
 
-                    db.session.add(company)
-                    db.session.commit()
-                    # self.get_users(user)
+            index += 1
 
-                index += 1
-
-    def get_users(self, user):
+    def _get_users(self, user):
         """Unused for now"""
         print("==> Nb orgs: {}".format(user.get_orgs().totalCount))
 
