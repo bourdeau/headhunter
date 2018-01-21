@@ -1,3 +1,4 @@
+import urllib
 from urllib.parse import urlparse
 from .client import Client
 from bs4 import BeautifulSoup
@@ -26,7 +27,7 @@ class Wtj():
         url = self.base_url + route
 
         if params:
-            url = url + '?' + urlparse.urlencode(params)
+            url = url + '?' + urllib.parse.urlencode(params)
 
         html = client.request(url)
 
