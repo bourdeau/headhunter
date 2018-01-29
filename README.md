@@ -16,7 +16,6 @@ cp config-dist.py config.py
 ## Install db and run scraping
 ```bash
 pipenv shell
-export FLASK_APP=run.py
 
 # Create a fresh database
 flask init_db
@@ -31,8 +30,6 @@ flask scrap_github
 ## Run
 ```bash
 pipenv shell
-export FLASK_APP=run.py
-export FLASK_DEBUG=1
 
 flask run
 ```
@@ -40,7 +37,6 @@ flask run
 ## Migrations:
 ```bash
 pipenv shell
-export FLASK_APP=run.py
 
 flask db migrate
 flask db upgrade
