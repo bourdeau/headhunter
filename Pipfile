@@ -1,12 +1,9 @@
 [[source]]
-
-url = "https://pypi.python.org/simple"
+url = "https://github.com/bourdeau/headhunter"
 verify_ssl = true
 name = "pypi"
 
-
 [packages]
-
 flask = "==0.12.2"
 flask-sqlalchemy = "==2.3.2"
 flask-migrate = "==2.1.1"
@@ -20,12 +17,11 @@ lxml = "==4.1.1"
 sqlalchemy-utils = "*"
 pygithub = "*"
 email-split = "*"
-
+flask-marshmallow = "*"
+marshmallow-sqlalchemy = "*"
+flask-cors = "*"
 
 [dev-packages]
 
-
-
 [requires]
-
 python_version = "3.6"

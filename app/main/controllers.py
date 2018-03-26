@@ -1,12 +1,13 @@
 from app.blueprints import main
 from flask import render_template, request
-from flask_security import login_required
 from app.main.models import Company
-
+from app.main.schema import CompanySchema
+from flask import jsonify
 
 @main.route("/", methods=['GET'])
-@login_required
 def home():
     companies = Company.query.all()
+    companies_schema = CompanySchema(many=True)
+    result = companies_schema.dump(companies)
 
-    return render_template('home.html', companies=companies)
+    return jsonify(result.data)

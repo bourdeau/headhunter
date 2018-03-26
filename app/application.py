@@ -2,7 +2,7 @@ from flask import Flask, render_template
 from flask_security import SQLAlchemyUserDatastore
 from importlib import import_module
 from app.blueprints import all_blueprints
-from app.extensions import db, migrate, security
+from app.extensions import db, migrate, security, ma, cors
 # Must be after db because classes need db
 from app.main.models import User, Role
 from app.commands import init_db, scrap_wtj, scrap_github
@@ -34,6 +34,8 @@ def register_shellcontext(app):
 
 def register_extensions(app):
     db.init_app(app)
+    ma.init_app(app)
+    cors.init_app(app)
     migrate.init_app(app, db)
     security.init_app(app, SQLAlchemyUserDatastore(db, User, Role))
 

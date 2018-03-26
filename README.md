@@ -6,6 +6,9 @@ look for companies, technologies that fit my skills, contact etc. I decided to
 code a little bit to help me scrap the web for this kind of informations 😈
 
 ## Installation
+
+Install geckodriver: https://github.com/mozilla/geckodriver
+
 ```bash
 pipenv install
 
