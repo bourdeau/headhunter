@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 from flask_security import SQLAlchemyUserDatastore
 from importlib import import_module
+from flask import jsonify
 from app.blueprints import all_blueprints
 from app.extensions import db, migrate, security, ma, cors
 # Must be after db because classes need db
@@ -27,7 +28,8 @@ def register_shellcontext(app):
         """Shell context objects."""
         return {
             'db': db,
-            'User': User}
+            'User': User
+        }
 
     app.shell_context_processor(shell_context)
 
@@ -56,7 +58,6 @@ def register_blueprints(app):
 
 
 def register_commands(app):
-
     """ Register Commands """
     app.cli.add_command(init_db)
     app.cli.add_command(scrap_wtj)
@@ -66,8 +67,8 @@ def register_commands(app):
 def register_errorhandlers(app):
     @app.errorhandler(404)
     def not_found_404(error):
-        return render_template('common/404.html'), 404
+        return jsonify(error=404, text=str(error)), 404
 
     @app.errorhandler(500)
     def not_found_500(error):
-        return render_template('common/500.html'), 500
+        return jsonify(error=500, text=str(error)), 500
