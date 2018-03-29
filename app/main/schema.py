@@ -1,4 +1,4 @@
-from marshmallow import Schema, fields, pprint
+from marshmallow import Schema, fields
 
 
 class TechnologySchema(Schema):
@@ -6,6 +6,7 @@ class TechnologySchema(Schema):
     name = fields.String()
     created_at = fields.DateTime()
     updated_at = fields.DateTime()
+
 
 class CompanySchema(Schema):
     id = fields.Integer()
