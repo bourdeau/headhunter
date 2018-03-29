@@ -1,5 +1,5 @@
 from flask import Blueprint
 
-main = Blueprint('main', 'app.main.controllers', template_folder='templates')
+main = Blueprint('main', 'app.main.controllers')
 
 all_blueprints = (main)
