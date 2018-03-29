@@ -1,7 +1,6 @@
-from flask import Flask, render_template
+from flask import Flask, jsonify
 from flask_security import SQLAlchemyUserDatastore
 from importlib import import_module
-from flask import jsonify
 from app.blueprints import all_blueprints
 from app.extensions import db, migrate, security, ma, cors
 # Must be after db because classes need db

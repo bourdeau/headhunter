@@ -6,7 +6,7 @@ from flask import jsonify
 
 
 @main.route("/companies", methods=['GET'])
-def home():
+def get_companies():
     nb_record = 20
     p = request.args.get('p')
 
@@ -23,3 +23,13 @@ def home():
     }
 
     return jsonify(data)
+
+
+@main.route("/companies/<id>", methods=['GET'])
+def get_company(id):
+
+    company = Company.query.get(id)
+    companies_schema = CompanySchema()
+    result = companies_schema.dump(company)
+
+    return jsonify(result)
