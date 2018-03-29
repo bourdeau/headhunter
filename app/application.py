@@ -14,23 +14,11 @@ def create_app():
 
     register_extensions(app)
     register_blueprints(app)
-    register_errorhandlers(app)
     register_shellcontext(app)
     register_commands(app)
+    register_errorhandlers(app)
 
     return app
-
-
-def register_shellcontext(app):
-    """Register shell context objects."""
-    def shell_context():
-        """Shell context objects."""
-        return {
-            'db': db,
-            'User': User
-        }
-
-    app.shell_context_processor(shell_context)
 
 
 def register_extensions(app):
@@ -54,6 +42,18 @@ def register_blueprints(app):
     #     app.register_blueprint(module)
 
     return None
+
+
+def register_shellcontext(app):
+    """Register shell context objects."""
+    def shell_context():
+        """Shell context objects."""
+        return {
+            'db': db,
+            'User': User
+        }
+
+    app.shell_context_processor(shell_context)
 
 
 def register_commands(app):
