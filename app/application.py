@@ -10,6 +10,7 @@ from app.commands import init_db, scrap_wtj, scrap_github
 
 def create_app():
     app = Flask(__name__)
+
     app.config.from_object('config')
 
     register_extensions(app)

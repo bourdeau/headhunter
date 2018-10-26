@@ -1,0 +1,34 @@
+version: "3.4"
+
+services:
+
+   headhunter:
+     build: .
+     container_name: headhunter
+     volumes:
+         - ./:/app
+     tty: true
+     depends_on:
+         - db
+     ports:
+         - "5000:5000"
+     env_file:
+         - ./.env
+
+   db:
+     image: mysql:5.7
+     container_name: mysql
+     volumes:
+       - db_data:/var/lib/mysql
+     environment:
+       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS}
+       MYSQL_DATABASE: ${DB_NAME}
+       MYSQL_USER: ${DB_USER}
+       MYSQL_PASSWORD: ${DB_PASS}
+     ports:
+         - "3307:3306"
+     env_file:
+         - ./.env
+
+volumes:
+    db_data:

@@ -2,7 +2,7 @@ import os
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 DEBUG = True
-DB_HOST = 'localhost'
+DB_HOST = '0.0.0.0'
 DB_USER = 'root'
 DB_PASS = 'CHANGE_ME!'
 DB_NAME = 'headhunter'
